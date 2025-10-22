@@ -17,7 +17,7 @@ class _MyAppState extends State<MyApp> {
   String? errorMessage;
 
   void fetchData() async {
-    final url = Uri.parse('https://jsonplaceholder.typicode.com/posts');
+    final url = Uri.parse('https://jsonplaceholder.typicode.com/posta');
     setState(() {
       isLoading = true;
     });
@@ -53,7 +53,14 @@ class _MyAppState extends State<MyApp> {
           body: isLoading
               ? Center(child: CircularProgressIndicator())
               : errorMessage != null
-                  ? Center(child: Text(errorMessage!))
+                  ? Center(
+                      child: Column(
+                        children: [
+                          Text(errorMessage!),
+                          ElevatedButton(
+                              onPressed: fetchData, child: Text("Retry"))
+                        ],
+                      ))
                   : posts.isEmpty
                       ? Center(
                           child: ElevatedButton(
